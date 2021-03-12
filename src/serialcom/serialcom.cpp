@@ -1,6 +1,8 @@
+#include <Arduino.h>
+
 #include "serialcom.h"
 
-void poll_serial(double tc_temperature)
+void poll_serial(double tc_temperature, double cj_temperature)
 {
   char commandBuffer[51];
   
@@ -19,6 +21,12 @@ void poll_serial(double tc_temperature)
       {
         char printString[15];
         dtostre(tc_temperature, printString, 7, DTOSTR_UPPERCASE | DTOSTR_PLUS_SIGN);
+        Serial.println(printString);
+      }
+      else if(!(bool)strncmp(commandBuffer, "readCJ?", 7))
+      {
+        char printString[15];
+        dtostre(cj_temperature, printString, 7, DTOSTR_UPPERCASE | DTOSTR_PLUS_SIGN);
         Serial.println(printString);
       }
     }
