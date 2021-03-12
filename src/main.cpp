@@ -8,25 +8,6 @@
 const byte MAX_DR = 8;
 const byte MAX_CS = 10;
 
-#ifdef THERMOLINO_2A
-#endif
-
-#ifdef THERMOLINO_TEST
-const byte VFD_RS = A1;
-const byte VFD_EN = A0;
-const byte VFD_D0 = 4;
-const byte VFD_D1 = A5;
-const byte VFD_D2 = 5;
-const byte VFD_D3 = A4;
-const byte VFD_D4 = 6;
-const byte VFD_D5 = A3;
-const byte VFD_D6 = 7;
-const byte VFD_D7 = A2;
-const byte SEL_PB = 2;
-LiquidCrystal display(VFD_RS, VFD_EN, VFD_D0, VFD_D1, VFD_D2, VFD_D3, VFD_D4, VFD_D5, VFD_D6, VFD_D7);
-#endif
-
-
 // Thermocouple readout chip
 Adafruit_MAX31856 maxthermo = Adafruit_MAX31856(MAX_CS);
 
