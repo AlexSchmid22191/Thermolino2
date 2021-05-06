@@ -22,8 +22,20 @@ const byte VFD_D7 = 2;
 
 const byte SEL_PB = A0;
 
-static LiquidCrystal display(VFD_RS, VFD_RW, VFD_EN, VFD_D0, VFD_D1, VFD_D2, VFD_D3, VFD_D4, VFD_D5, VFD_D6, VFD_D7);
+#define DEG_SYM 7
+byte degree[8] = 
+{
+  B01100,
+  B10010,
+  B10010,
+  B01100,
+  B00000,
+  B00000,
+  B00000,
+  B00000
+};
 
+static LiquidCrystal display(VFD_RS, VFD_RW, VFD_EN, VFD_D0, VFD_D1, VFD_D2, VFD_D3, VFD_D4, VFD_D5, VFD_D6, VFD_D7);
 
 void display_temperatures(double t_cold_junction, double t_hot_junction);
 void display_errors(byte fault);
@@ -31,17 +43,18 @@ void display_errors(byte fault);
 
 void initialize_display()
 {
+  display.createChar(7, degree);
   display.begin(16, 2);
   display.clear();
   display.setCursor(0, 0);
   display.print("TC: ");
   display.setCursor(12, 0);
-  display.print(char(223));
+  display.write(DEG_SYM);
   display.print("C");
   display.setCursor(0, 1);
   display.print("CJ: ");
   display.setCursor(12, 1);
-  display.print(char(223));
+  display.write(DEG_SYM);
   display.print("C");
 };
 

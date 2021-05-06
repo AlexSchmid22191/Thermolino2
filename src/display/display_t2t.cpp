@@ -1,4 +1,4 @@
-// Implements display drawing functionalities for the Thermolino 2A (Blue PCB)
+// Implements display drawing functionalities for the Thermolino 2T (Greeb PCB)
 
 
 #include <SPI.h>
@@ -27,20 +27,33 @@ static LiquidCrystal display(VFD_RS, VFD_EN, VFD_D0, VFD_D1, VFD_D2, VFD_D3, VFD
 void display_temperatures(double t_cold_junction, double t_hot_junction);
 void display_errors(byte fault);
 
+#define DEG_SYM 7
+byte degree[8] = 
+{
+  B01100,
+  B10010,
+  B10010,
+  B01100,
+  B00000,
+  B00000,
+  B00000,
+  B00000
+};
 
 void initialize_display()
 {
+  display.createChar(7, degree);
   display.begin(16, 2);
   display.clear();
   display.setCursor(0, 0);
   display.print("TC: ");
   display.setCursor(12, 0);
-  display.print(char(223));
+  display.write(DEG_SYM);
   display.print("C");
   display.setCursor(0, 1);
   display.print("CJ: ");
   display.setCursor(12, 1);
-  display.print(char(223));
+  display.write(DEG_SYM);
   display.print("C");
 };
 
